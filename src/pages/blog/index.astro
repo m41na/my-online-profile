@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Notes" description="Notes on things I'm building and learning.">
+  <section class="pt-4 pb-10">
+    <p class="eyebrow mb-3">Log</p>
+    <h1 class="font-display text-5xl leading-[1.05] tracking-tight">Notes</h1>
+    <p class="mt-4 max-w-xl text-ink-soft leading-relaxed">
+      Short write-ups on things I'm building, breaking, and learning.
+    </p>
+  </section>
+
+  <section class="ledger-rule pt-8">
+    {posts.length === 0 && (
+      <p class="text-ink-soft italic">Nothing published yet — first entry coming soon.</p>
+    )}
+    <ul class="divide-y divide-rule">
+      {posts.map((post) => (
+        <li class="py-6 first:pt-0">
+          <a href={`/blog/${post.id}/`} class="group block">
+            <div class="flex items-baseline justify-between gap-4">
+              <h2 class="font-display text-2xl group-hover:text-accent transition-colors">
+                {post.data.title}
+              </h2>
+              <time class="eyebrow whitespace-nowrap" datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </time>
+            </div>
+            <p class="text-ink-soft mt-2 leading-relaxed">{post.data.description}</p>
+            {post.data.tags.length > 0 && (
+              <div class="flex gap-2 mt-3">
+                {post.data.tags.map((tag) => (
+                  <span class="text-xs font-mono px-1.5 py-0.5 bg-surface rounded-sm border border-rule text-ink-soft">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>

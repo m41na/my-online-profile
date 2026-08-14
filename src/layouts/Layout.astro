@@ -1,0 +1,51 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/resume';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = profile.summary } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <title>{title} — {profile.name}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-paper text-ink font-body antialiased">
+    <div class="max-w-3xl mx-auto px-6 sm:px-8">
+      <header class="flex items-baseline justify-between pt-10 pb-6">
+        <a href="/" class="font-display text-lg tracking-tight hover:text-accent transition-colors">
+          {profile.name}
+        </a>
+        <nav class="flex gap-6 eyebrow">
+          <a href="/" class="hover:text-accent transition-colors">Résumé</a>
+          <a href="/blog" class="hover:text-accent transition-colors">Notes</a>
+        </nav>
+      </header>
+
+      <main class="pb-20">
+        <slot />
+      </main>
+
+      <footer class="ledger-rule py-8 mb-6 flex items-center justify-between eyebrow">
+        <span>&copy; {new Date().getFullYear()} {profile.name}</span>
+        <span>Madison, WI</span>
+      </footer>
+    </div>
+  </body>
+</html>

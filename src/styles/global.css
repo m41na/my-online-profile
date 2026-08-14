@@ -1,0 +1,80 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ---------------------------------------------------------------------------
+   Design tokens
+   Direction: "field ledger" — a personal record of work, kept like a
+   well-organized logbook rather than a marketing landing page. Warm paper,
+   deep pine ink, a single stamped amber accent for dates and marks. A hairline
+   ledger rule with tick marks runs down the margin of the experience section.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-paper: #f2f0e6;
+  --color-surface: #e9e5d7;
+  --color-ink: #1e2a25;
+  --color-ink-soft: #4a564f;
+  --color-rule: #c9c4b0;
+  --color-accent: #c1791f;
+  --color-accent-soft: #e4b876;
+  --color-moss: #4b6357;
+
+  --font-display: "Fraunces", "Iowan Old Style", ui-serif, serif;
+  --font-body: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+  }
+
+  ::selection {
+    background: var(--color-accent-soft);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-moss);
+  }
+
+  .ledger-rule {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .prose-ledger a {
+    color: var(--color-moss);
+    text-decoration-color: var(--color-accent-soft);
+    text-underline-offset: 3px;
+  }
+  .prose-ledger a:hover {
+    color: var(--color-accent);
+  }
+}
