@@ -3,7 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection, getEntry } from 'astro:content';
 
 const practiceEntry = await getEntry('practice', 'main');
-const { specializations, engagements, credentials, thesis, ...practice } = practiceEntry!.data;
+if (!practiceEntry) {
+  throw new Error(
+    "Could not load the 'practice' data entry ('main') from src/data/practice.yaml. " +
+      'This usually means a stale .astro cache — stop the dev server and run: ' +
+      'rm -rf .astro node_modules/.vite && npm run dev'
+  );
+}
+const { specializations, engagements, credentials, thesis, ...practice } = practiceEntry.data;
 
 const allCasework = await getCollection('casework', ({ data }) => data.status === 'live');
 const casework = allCasework.sort((a, b) => a.data.order - b.data.order);

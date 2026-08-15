@@ -3,7 +3,14 @@ import '../styles/global.css';
 import { getEntry } from 'astro:content';
 
 const practiceEntry = await getEntry('practice', 'main');
-const practice = practiceEntry!.data;
+if (!practiceEntry) {
+  throw new Error(
+    "Could not load the 'practice' data entry ('main') from src/data/practice.yaml. " +
+      'This usually means a stale .astro cache — stop the dev server and run: ' +
+      'rm -rf .astro node_modules/.vite && npm run dev'
+  );
+}
+const practice = practiceEntry.data;
 
 interface Props {
   title: string;
