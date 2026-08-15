@@ -24,6 +24,22 @@ export const practice = {
   ],
 };
 
+// The cross-case-study thesis — stated once, directly, rather than left for
+// a careful reader to notice across three separate write-ups.
+export const thesis = {
+  eyebrow: 'The pattern',
+  heading: 'I keep solving this before it has a name.',
+  body: "Three times now: COBOL claims logic decomposed into services years before \u201cAI-assisted modernization\u201d was a category. A CDC platform publishing domain-owned events before \u201cdata mesh\u201d had a name. A tiered deployment governance model before \u201cplatform engineering\u201d and \u201cgolden paths\u201d were part of the vocabulary. That's not a coincidence worth burying inside three separate case studies \u2014 it's the actual case for hiring me: I solve the production problem first, and the industry writes the playbook after.",
+  aiNote: "The AI-integration work is a different kind of proof \u2014 not ahead of a trend, but doing the hardest, least-solved part of a problem everyone's racing toward right now.",
+};
+
+// Named explicitly because it's a sharper, higher-trust pitch to an
+// insurance buyer than "generalist Java consultant."
+export const verticalFocus = {
+  title: 'Particular depth in insurance',
+  body: "Two of the four engagements below \u2014 health insurance claims modernization and P&C/specialty insurance claims data \u2014 sit in the same vertical. Insurance carries one of the largest shares of current IT staffing demand of any industry. That's not incidental, and it's worth stating plainly rather than leaving it for a buyer to piece together.",
+};
+
 // The four (plus one optional) areas of specialization — each backed by a
 // full case study in src/content/casework/. Order here drives the homepage.
 export const specializations = [

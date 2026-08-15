@@ -22,6 +22,8 @@ But the part of this engagement that actually mattered was making the whole thin
 
 ## Why this matters now
 
+This one's a different kind of proof than the rest of the work here. The other engagements were about solving a problem before the industry had a name for it. This one's the opposite: LLM reliability is being figured out in real time, right now, by everyone at once — there's no years-later vindication to point to, because the industry hasn't caught up yet. What sets this apart isn't timing, it's that most people racing to ship AI features are still stuck on "does the call work," and this was already answering "does the call behave like a production dependency."
+
 Everyone can wire an LLM call into a Java service this year — the SDKs make that trivial. What's still genuinely hard, and still underserved, is making that call behave the way the rest of your production system behaves: instrumented, bounded, recoverable, and boring when it needs to be. That's the difference between an AI feature that survives its first bad day in production and one that becomes the thing your on-call engineer dreads.
 
 If you're trying to get AI features past the proof-of-concept stage in a JVM shop and need someone who treats "the model didn't respond" as an engineering problem rather than a shrug, this is the exact gap I closed here.
