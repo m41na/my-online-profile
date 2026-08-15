@@ -50,10 +50,10 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
     <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-6">
       {specializations.map((item) => (
         <li>
-          <h3 class="font-display text-lg text-ink">
-            {item.title} <span class="font-body font-normal text-sm text-ink-soft">(client — {item.client})</span>
-          </h3>
-          <p class="text-sm text-ink-soft leading-relaxed mt-1.5">{item.detail}</p>
+          <h3 class="font-display text-lg text-ink">{item.title}</h3>
+          <p class="text-sm text-ink-soft leading-relaxed mt-1.5">
+            {item.detail} <span class="text-xs">(client — {item.client})</span>
+          </p>
         </li>
       ))}
     </ul>

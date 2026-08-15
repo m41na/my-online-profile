@@ -29,7 +29,7 @@ export const practice = {
 export const thesis = {
   eyebrow: 'The pattern',
   heading: 'I keep solving this before it has a name.',
-  body: "Three times now: COBOL claims logic decomposed into services years before \u201cAI-assisted modernization\u201d was a category. A CDC platform publishing domain-owned events before \u201cdata mesh\u201d had a name. A tiered deployment governance model before \u201cplatform engineering\u201d and \u201cgolden paths\u201d were part of the vocabulary. That's not a coincidence worth burying inside three separate case studies \u2014 it's the actual case for hiring me: I solve the production problem first, and the industry writes the playbook after.",
+  body: "Three times now: COBOL claims logic decomposed into services years before \u201cAI-assisted modernization\u201d was a category. A CDC platform publishing domain-owned events before \u201cdata mesh\u201d had a name. A tiered deployment governance model before \u201cplatform engineering\u201d and \u201cgolden paths\u201d were part of the vocabulary. Three times isn't luck.",
   aiNote: "The AI-integration work is a different kind of proof \u2014 not ahead of a trend, but doing the hardest, least-solved part of a problem everyone's racing toward right now.",
 };
 
