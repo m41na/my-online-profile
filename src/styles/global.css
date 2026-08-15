@@ -3,11 +3,12 @@
 
 /* ---------------------------------------------------------------------------
    Design tokens
-   Direction: modern technical-platform aesthetic — dark, violet-and-coral,
-   rounded panels with soft glow, mono labels. References the Astro dev
-   tooling look (dark slate, violet toggle, coral error accent) the client
-   pointed to directly. Dark is the primary character; light is a genuine
-   companion built from the same accent language, not an inverted afterthought.
+   Direction: modern technical-platform aesthetic, built off Forgejo's own
+   brand (forgejo.org) — dark by default, their documented primary brand
+   color #fb923c as the accent, Inter throughout (their site runs on the
+   AstroWind template, which uses Inter for both display and body rather
+   than a separate serif/display face). Rounded panels with soft glow,
+   mono labels for tags and metadata.
 
    Token names below (paper/ink/moss/etc.) are legacy from an earlier
    direction — kept as-is to avoid touching every template's utility
@@ -15,32 +16,32 @@
 --------------------------------------------------------------------------- */
 @theme {
   /* Light (default, no data-theme attribute) */
-  --color-paper: #f7f6fc;
+  --color-paper: #faf9f7;
   --color-surface: #ffffff;
-  --color-ink: #17151f;
-  --color-ink-soft: #5b5770;
-  --color-rule: #e3e1ee;
-  --color-accent: #7c5cf0;
-  --color-accent-soft: #c9bdf7;
-  --color-moss: #6d4fd1;
-  --color-coral: #d9633f;
+  --color-ink: #1a1a1f;
+  --color-ink-soft: #5c5a63;
+  --color-rule: #e7e5e0;
+  --color-accent: #c2570a;
+  --color-accent-soft: #fde4cc;
+  --color-moss: #b45309;
+  --color-coral: #ea580c;
 
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
 /* Dark mode — toggled by data-theme="dark" on <html>. */
 :root[data-theme="dark"] {
-  --color-paper: #0c0c14;
-  --color-surface: #16151f;
-  --color-ink: #f1f0f6;
-  --color-ink-soft: #a6a3b8;
-  --color-rule: #2b2a3a;
-  --color-accent: #a78bfa;
-  --color-accent-soft: #4c3f80;
-  --color-moss: #b6a2f7;
-  --color-coral: #ef8a68;
+  --color-paper: #0d0d12;
+  --color-surface: #17171f;
+  --color-ink: #f2f1f5;
+  --color-ink-soft: #a3a1ad;
+  --color-rule: #2a2a35;
+  --color-accent: #fb923c;
+  --color-accent-soft: #7c4a1f;
+  --color-moss: #fdba74;
+  --color-coral: #f97316;
 }
 
 @layer base {
