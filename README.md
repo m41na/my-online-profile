@@ -114,28 +114,29 @@ file is the only place to do it — page templates just reference the token
 names (`bg-paper`, `text-accent`, `.panel`, etc.) and pick up whatever's
 defined there.
 
-## Deploying to Cloudflare Pages (free)
+## Deploying to Cloudflare (free)
+
+Cloudflare's current onboarding path deploys static sites as a **Worker with
+static assets**, not the older "Pages" flow — the dashboard now shows a
+"Deploy command" (`npx wrangler deploy`) instead of a separate build-output-
+directory field. That config lives in `wrangler.jsonc` at the project root,
+already set up in this repo to point at `./dist`.
 
 1. Push this project to a new GitHub repository.
-2. In the [Cloudflare dashboard](https://dash.cloudflare.com) → **Workers & Pages** →
-   **Create application** → **Pages** → **Connect to Git**.
-3. Select the repo. Cloudflare auto-detects Astro; confirm these build settings:
+2. In the [Cloudflare dashboard](https://dash.cloudflare.com), go to
+   **Compute (Workers)** → **Create** → connect your GitHub repo.
+3. Cloudflare auto-fills the build settings from this repo — confirm:
    - Build command: `npm run build`
-   - Build output directory: `dist`
-4. Deploy. You'll get a `*.pages.dev` URL immediately.
-5. Optional: **Custom domains** tab → add your own domain (free SSL included).
-6. Update `site` in `astro.config.mjs` to your real domain once you have one —
-   this is used for the sitemap and RSS feed.
+   - Deploy command: `npx wrangler deploy`
+4. Click **Deploy**. You'll get a `*.workers.dev` URL.
+5. Custom domain: from the Worker's dashboard page, **Settings → Domains &
+   Routes → Add**. Free SSL included.
+6. Update `site` in `astro.config.mjs` to your real domain once you have one
+   — this is used for the sitemap and RSS feed.
 
-**Node version:** Cloudflare Pages' build image defaults to an old Node
-version unless told otherwise — this project needs Node ≥22.12. A
-`.node-version` file is already committed at the project root, which
-Cloudflare reads automatically, so this should just work. If a build ever
-fails with a Node version error, double-check that file is still there, or
-set a `NODE_VERSION` environment variable to `22` under the project's
-**Settings → Environment variables** — note that production and preview
-deployments have *separate* environment variables in Cloudflare Pages, so
-if you set it manually, set it in both places.
+**Node version:** same note as before — this project needs Node ≥22.12, and
+the `.node-version` file at the project root handles that automatically for
+the build step.
 
 From then on, every `git push` to your main branch triggers a new build and
 deploy automatically — edit a YAML or Markdown file, push, and the live site
@@ -149,3 +150,4 @@ updates in about a minute. No dashboard visits, no code changes.
 - Tailwind CSS v4 with a custom design token system
 - MDX support if you ever want components inside a post or case study
 - Sitemap generation
+- `wrangler.jsonc` pre-configured for Cloudflare Workers static-asset deploys

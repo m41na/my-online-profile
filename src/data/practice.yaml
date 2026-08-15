@@ -14,9 +14,10 @@ main:
   positioning: >-
     Kerbdrop is an independent engineering practice. It exists for one job:
     walking into an organization that's charting its new journey on a platform
-    migration, a legacy rewrite, a micro-services modernization, or an AI rollout that needs to hold up in production — and leaving it with working systems and a team that can run
-    them. Engagements have a start and an end. No headcount, no ramp-up
-    curve, no bench.
+    migration, a legacy rewrite, a micro-services modernization, or an AI
+    rollout that needs to hold up in production — and leaving it with working
+    systems and a team that can run them. Engagements have a start and an
+    end. No headcount, no ramp-up curve, no bench.
   engagementModel: Available for C2C and 1099 engagements — short-term, scoped, and outcome-defined.
   location: Sheboygan, WI · Remote-first
   foundedYear: "2025"
@@ -36,13 +37,19 @@ main:
     eyebrow: The pattern
     heading: Blazing the trail with enterprise solutions.
     body: >-
-      I have consistently been building engineering solutions even before the enterprise
-      came up with a name for them: COBOL system decomposed into microservices years
-      before "AI-assisted modernization" was a category. A CDC platform
-      publishing domain-owned events before "data mesh" had a name. A
-      tiered, deployment governance model before "platform engineering" and
-      "golden paths" were part of the vocabulary. This can't be dismissed as just sheer luck.
-      This is being in tune with the nature of solutions that will spring an organization forward.
+      I have consistently been building engineering solutions even before
+      the enterprise came up with a name for them: COBOL system decomposed
+      into microservices years before "AI-assisted modernization" was a
+      category. A CDC platform publishing domain-owned events before "data
+      mesh" had a name. A tiered deployment governance model before
+      "platform engineering" and "golden paths" were part of the
+      vocabulary. That instinct hasn't gone anywhere. Most platform teams
+      now have the tooling — Gartner puts adoption at 80% of large orgs by
+      2027 — but fewer than a third are seeing it actually pay off, and the
+      same gap is opening up with AI governance bolted onto platforms
+      after the fact instead of built in from the start. That's today's
+      version of the same problem: not whether you've got the trend, but
+      whether it actually works.
 
   # The "Where I work" grid on the homepage. Order here is the display
   # order (fills left-to-right, top-to-bottom in a 2-column grid).
@@ -55,8 +62,8 @@ main:
       client: Discover Financial Services
     - title: Legacy modernization
       detail: >-
-        Decomposing mainframe and monolith systems into micro-services, including API
-        design, documentation, and access management included — with
+        Decomposing mainframe and monolith systems into micro-services,
+        including API design, documentation, and access management — with
         the testing discipline that keeps the rewrite from becoming the
         outage.
       client: WPS Health Solutions
