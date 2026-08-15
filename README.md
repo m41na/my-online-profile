@@ -8,7 +8,8 @@ Markdown file — no code to touch to update anything.
 
 - **`src/data/practice.yaml`** — the one file for identity, positioning, the
   thesis statement, the "Where I work" specializations, the condensed
-  engagement history, and credentials. Plain YAML, no code.
+  engagement history, credentials, and the founding year shown in the
+  footer. Plain YAML, no code.
 - **`src/content/casework/*.md`** — one file per case study. YAML frontmatter
   up top (title, sector, client, stack, duration, team size, role, outcome)
   and the write-up as Markdown below it.
@@ -76,13 +77,42 @@ npm run new-post "Title of the thing"
 ```
 
 This creates a pre-filled Markdown file in `src/content/blog/` with today's
-date and `draft: true`. Write your post, flip `draft` to `false`, then:
+date and `draft: true`. The frontmatter shape:
+
+```yaml
+---
+title: "Post title"
+description: "One-line summary shown on the /blog list."
+date: 2026-08-15                # YYYY-MM-DD, no time zone fuss
+tags: ["meta"]                  # optional
+draft: true                     # flip to false to publish
+---
+
+Write the post here in Markdown.
+```
+
+Write your post, flip `draft` to `false`, then:
 
 ```bash
 git add -A
 git commit -m "post: title of the thing"
 git push
 ```
+
+## Design system
+
+Colors, fonts, and the card/panel treatment all live in
+`src/styles/global.css` as CSS custom properties — nothing is hardcoded in
+individual pages. The palette is defined once for light mode and overridden
+under `:root[data-theme="dark"]` for dark mode; every page automatically
+respects both. Typeface is Inter (display and body) plus IBM Plex Mono for
+tags, labels, and dates. The nav includes a working light/dark toggle that
+remembers the visitor's choice.
+
+If you want to adjust the accent color, background, or spacing scale, that
+file is the only place to do it — page templates just reference the token
+names (`bg-paper`, `text-accent`, `.panel`, etc.) and pick up whatever's
+defined there.
 
 ## Deploying to Cloudflare Pages (free)
 
