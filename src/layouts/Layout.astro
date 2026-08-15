@@ -17,6 +17,16 @@ const { title, description = practice.positioning } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>
+      // Set theme before first paint to avoid a flash of the wrong theme.
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        } catch (e) {}
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
@@ -38,10 +48,18 @@ const { title, description = practice.positioning } = Astro.props;
           </span>
           <span class="eyebrow hidden sm:inline">{practice.principal}</span>
         </a>
-        <nav class="flex gap-6 eyebrow">
+        <nav class="flex items-center gap-6 eyebrow">
           <a href="/work" class="hover:text-accent transition-colors">Work</a>
           <a href="/blog" class="hover:text-accent transition-colors">Notes</a>
           <a href="/#contact" class="hover:text-accent transition-colors">Contact</a>
+          <button
+            id="theme-toggle"
+            type="button"
+            class="border border-rule rounded-sm px-2 py-1 hover:border-accent hover:text-accent transition-colors"
+            aria-label="Toggle dark mode"
+          >
+            Dark
+          </button>
         </nav>
       </header>
 
@@ -54,5 +72,29 @@ const { title, description = practice.positioning } = Astro.props;
         <span>{practice.location}</span>
       </footer>
     </div>
+
+    <script is:inline>
+      (function () {
+        var btn = document.getElementById('theme-toggle');
+        function isDark() {
+          return document.documentElement.getAttribute('data-theme') === 'dark';
+        }
+        function updateLabel() {
+          btn.textContent = isDark() ? 'Light' : 'Dark';
+          btn.setAttribute('aria-label', isDark() ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+        updateLabel();
+        btn.addEventListener('click', function () {
+          if (isDark()) {
+            document.documentElement.removeAttribute('data-theme');
+            try { localStorage.setItem('theme', 'light'); } catch (e) {}
+          } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            try { localStorage.setItem('theme', 'dark'); } catch (e) {}
+          }
+          updateLabel();
+        });
+      })();
+    </script>
   </body>
 </html>

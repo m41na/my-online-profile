@@ -4,23 +4,43 @@
 /* ---------------------------------------------------------------------------
    Design tokens
    Direction: "field ledger" — a personal record of work, kept like a
-   well-organized logbook rather than a marketing landing page. Warm paper,
-   deep pine ink, a single stamped amber accent for dates and marks. A hairline
-   ledger rule with tick marks runs down the margin of the experience section.
+   well-organized logbook rather than a marketing landing page. Warm,
+   muted parchment (not stark white), deep pine ink, a single burnished
+   amber accent for dates and marks. A hairline ledger rule with tick
+   marks runs down the margin of the experience section.
+
+   Light values are the defaults below. Dark-mode values live in the
+   `:root[data-theme="dark"]` override further down — same token names,
+   so every component that reads a token automatically re-themes.
 --------------------------------------------------------------------------- */
 @theme {
-  --color-paper: #f2f0e6;
-  --color-surface: #e9e5d7;
-  --color-ink: #1e2a25;
-  --color-ink-soft: #4a564f;
-  --color-rule: #c9c4b0;
-  --color-accent: #c1791f;
-  --color-accent-soft: #e4b876;
-  --color-moss: #4b6357;
+  --color-paper: #e7e1d1;
+  --color-surface: #dcd4be;
+  --color-ink: #262f29;
+  --color-ink-soft: #55604f;
+  --color-rule: #c2b99e;
+  --color-accent: #b06a1d;
+  --color-accent-soft: #d6a467;
+  --color-moss: #536450;
 
   --font-display: "Fraunces", "Iowan Old Style", ui-serif, serif;
   --font-body: "Public Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* Dark mode — toggled by setting data-theme="dark" on <html> (see the
+   inline script in Layout.astro). Higher specificity than the plain
+   :root,:host rule Tailwind emits for @theme, so this always wins when
+   the attribute is present, regardless of layer order. */
+:root[data-theme="dark"] {
+  --color-paper: #1b211c;
+  --color-surface: #242b24;
+  --color-ink: #e5e0d0;
+  --color-ink-soft: #b3ae9b;
+  --color-rule: #3a4136;
+  --color-accent: #d9a24e;
+  --color-accent-soft: #8c6631;
+  --color-moss: #92a88c;
 }
 
 @layer base {
@@ -28,6 +48,7 @@
     background: var(--color-paper);
     color: var(--color-ink);
     scroll-behavior: smooth;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   body {
