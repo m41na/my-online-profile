@@ -127,6 +127,16 @@ defined there.
 6. Update `site` in `astro.config.mjs` to your real domain once you have one —
    this is used for the sitemap and RSS feed.
 
+**Node version:** Cloudflare Pages' build image defaults to an old Node
+version unless told otherwise — this project needs Node ≥22.12. A
+`.node-version` file is already committed at the project root, which
+Cloudflare reads automatically, so this should just work. If a build ever
+fails with a Node version error, double-check that file is still there, or
+set a `NODE_VERSION` environment variable to `22` under the project's
+**Settings → Environment variables** — note that production and preview
+deployments have *separate* environment variables in Cloudflare Pages, so
+if you set it manually, set it in both places.
+
 From then on, every `git push` to your main branch triggers a new build and
 deploy automatically — edit a YAML or Markdown file, push, and the live site
 updates in about a minute. No dashboard visits, no code changes.
