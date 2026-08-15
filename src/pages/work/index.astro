@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allCasework = await getCollection('casework', ({ data }) => data.status === 'live');
+const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="Case files" description="Engagements where Kerbdrop was brought in to solve a specific, high-stakes problem.">
+  <section class="pt-4 pb-10">
+    <p class="eyebrow mb-3">Casework</p>
+    <h1 class="font-display text-5xl leading-[1.05] tracking-tight">Case files</h1>
+    <p class="mt-4 max-w-xl text-ink-soft leading-relaxed">
+      Engagements where I was brought in for a specific, high-stakes problem — not a headcount.
+    </p>
+  </section>
+
+  <section class="ledger-rule pt-8">
+    <ol class="space-y-8">
+      {casework.map((study, i) => (
+        <li>
+          <a href={`/work/${study.id}/`} class="group block">
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-sm text-accent flex-shrink-0">{String(i + 1).padStart(2, '0')}</span>
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 class="font-display text-2xl group-hover:text-accent transition-colors">
+                    {study.data.title}
+                  </h3>
+                  <span class="eyebrow whitespace-nowrap">{study.data.sector}</span>
+                </div>
+                <p class="text-ink-soft mt-2 leading-relaxed max-w-2xl">{study.data.hook}</p>
+                {study.data.stack.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mt-3">
+                    {study.data.stack.map((tag) => (
+                      <span class="text-xs font-mono px-1.5 py-0.5 bg-surface rounded-sm border border-rule text-ink-soft">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </section>
+</Layout>

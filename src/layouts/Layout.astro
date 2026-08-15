@@ -1,13 +1,13 @@
 ---
 import '../styles/global.css';
-import { profile } from '../data/resume';
+import { practice } from '../data/practice';
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = profile.summary } = Astro.props;
+const { title, description = practice.positioning } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,7 +17,7 @@ const { title, description = profile.summary } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
-    <title>{title} — {profile.name}</title>
+    <title>{title} — {practice.name}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,12 +29,16 @@ const { title, description = profile.summary } = Astro.props;
   <body class="bg-paper text-ink font-body antialiased">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">
       <header class="flex items-baseline justify-between pt-10 pb-6">
-        <a href="/" class="font-display text-lg tracking-tight hover:text-accent transition-colors">
-          {profile.name}
+        <a href="/" class="flex items-baseline gap-2.5 group">
+          <span class="font-display text-lg tracking-tight group-hover:text-accent transition-colors">
+            {practice.name}
+          </span>
+          <span class="eyebrow hidden sm:inline">{practice.principal}</span>
         </a>
         <nav class="flex gap-6 eyebrow">
-          <a href="/" class="hover:text-accent transition-colors">Résumé</a>
+          <a href="/work" class="hover:text-accent transition-colors">Work</a>
           <a href="/blog" class="hover:text-accent transition-colors">Notes</a>
+          <a href="/#contact" class="hover:text-accent transition-colors">Contact</a>
         </nav>
       </header>
 
@@ -43,8 +47,8 @@ const { title, description = profile.summary } = Astro.props;
       </main>
 
       <footer class="ledger-rule py-8 mb-6 flex items-center justify-between eyebrow">
-        <span>&copy; {new Date().getFullYear()} {profile.name}</span>
-        <span>Madison, WI</span>
+        <span>&copy; {new Date().getFullYear()} {practice.name}</span>
+        <span>{practice.location}</span>
       </footer>
     </div>
   </body>

@@ -1,0 +1,55 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const studies = await getCollection('casework', ({ data }) => data.status === 'live');
+  return studies.map((study) => ({
+    params: { id: study.id },
+    props: { study },
+  }));
+}
+
+const { study } = Astro.props;
+const { Content } = await render(study);
+---
+
+<Layout title={study.data.title} description={study.data.hook}>
+  <article class="pt-4">
+    <a href="/#work" class="eyebrow hover:text-accent transition-colors">&larr; Case files</a>
+
+    <header class="mt-6 mb-10">
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <span class="eyebrow">{study.data.sector}</span>
+        {study.data.client && <span class="eyebrow text-ink-soft">· {study.data.client}</span>}
+      </div>
+      <h1 class="font-display text-4xl sm:text-5xl leading-[1.05] tracking-tight mt-3">
+        {study.data.title}
+      </h1>
+      <p class="font-display italic text-lg text-ink-soft mt-3 max-w-2xl">{study.data.hook}</p>
+      {study.data.stack.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {study.data.stack.map((tag) => (
+            <span class="text-xs font-mono px-1.5 py-0.5 bg-surface rounded-sm border border-rule text-ink-soft">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="ledger-rule pt-8 prose-ledger max-w-none prose prose-headings:font-display prose-headings:tracking-tight prose-p:leading-relaxed prose-p:text-ink prose-a:no-underline prose-strong:text-ink prose-code:font-mono prose-code:text-sm prose-code:bg-surface prose-code:px-1 prose-code:py-0.5 prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none">
+      <Content />
+    </div>
+
+    <div class="ledger-rule pt-8 mt-10">
+      <p class="text-ink-soft">Looking at a similar problem?</p>
+      <a
+        href="/#contact"
+        class="inline-block mt-3 font-mono text-sm px-4 py-2 border border-ink rounded-sm hover:bg-ink hover:text-paper transition-colors"
+      >
+        Get in touch
+      </a>
+    </div>
+  </article>
+</Layout>

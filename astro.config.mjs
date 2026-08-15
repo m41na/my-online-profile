@@ -10,7 +10,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   // TODO: update to your real domain once you connect one in Cloudflare Pages
-  site: 'https://my-online-resume.pages.dev',
+  site: 'https://kerbdrop.pages.dev',
   vite: {
     plugins: [tailwindcss()]
   },

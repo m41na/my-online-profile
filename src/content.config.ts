@@ -13,4 +13,20 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const casework = defineCollection({
+  loader: glob({ base: './src/content/casework', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({
+    title: z.string(),
+    // The one-line hook shown on cards.
+    hook: z.string(),
+    sector: z.string(),
+    client: z.string().optional(),
+    // Short tag chips, e.g. ["Kafka", "Debezium", "CDC"]
+    stack: z.array(z.string()).default([]),
+    // Lower number = shown first. Use this to control priority, not date.
+    order: z.number(),
+    status: z.enum(['live', 'draft']).default('live'),
+  }),
+});
+
+export const collections = { blog, casework };
