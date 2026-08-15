@@ -10,7 +10,7 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
   <section class="pt-4 pb-10">
     <p class="eyebrow mb-3">Casework</p>
     <h1 class="font-display font-semibold text-5xl leading-[1.05] tracking-tight">Case files</h1>
-    <p class="mt-4 max-w-xl text-ink-soft leading-relaxed">
+    <p class="mt-4 text-ink-soft leading-relaxed">
       Engagements where I was brought in for a specific, high-stakes problem — not a headcount.
     </p>
   </section>
@@ -29,7 +29,7 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
                   </h3>
                   <span class="eyebrow whitespace-nowrap">{study.data.sector}</span>
                 </div>
-                <p class="text-ink-soft mt-2 leading-relaxed max-w-2xl">{study.data.hook}</p>
+                <p class="text-ink-soft mt-2 leading-relaxed">{study.data.hook}</p>
                 {(study.data.duration || study.data.teamSize || study.data.role) && (
                   <p class="eyebrow mt-2 text-ink-soft">
                     {[study.data.duration, study.data.teamSize && `Team of ${study.data.teamSize}`, study.data.role].filter(Boolean).join(' · ')}

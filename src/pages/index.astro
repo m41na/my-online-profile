@@ -28,7 +28,7 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
       <p class="font-display text-xl sm:text-2xl text-accent mt-3">
         {practice.tagline}
       </p>
-      <p class="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
+      <p class="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">
         {practice.positioning}
       </p>
       <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 eyebrow">
@@ -45,10 +45,10 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
   <!-- The pattern (thesis) -->
   <section class="panel px-6 py-8 sm:px-8 sm:py-10 mt-6">
     <p class="eyebrow mb-3">{thesis.eyebrow}</p>
-    <h2 class="font-display font-semibold text-3xl sm:text-4xl leading-tight tracking-tight max-w-2xl">
+    <h2 class="font-display font-semibold text-3xl sm:text-4xl leading-tight tracking-tight">
       {thesis.heading}
     </h2>
-    <p class="mt-4 max-w-2xl text-ink-soft leading-relaxed">
+    <p class="mt-4 text-ink-soft leading-relaxed">
       {thesis.body}
     </p>
   </section>
@@ -84,7 +84,7 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
                   </h3>
                   <span class="eyebrow whitespace-nowrap">{study.data.sector}</span>
                 </div>
-                <p class="text-ink-soft mt-2 leading-relaxed max-w-2xl">{study.data.hook}</p>
+                <p class="text-ink-soft mt-2 leading-relaxed">{study.data.hook}</p>
                 {(study.data.duration || study.data.teamSize || study.data.role) && (
                   <p class="eyebrow mt-2 text-ink-soft">
                     {[study.data.duration, study.data.teamSize && `Team of ${study.data.teamSize}`, study.data.role].filter(Boolean).join(' · ')}
@@ -131,7 +131,7 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
   <!-- Contact -->
   <section id="contact" class="mt-12 scroll-mt-8">
     <h2 class="eyebrow mb-4">Get in touch</h2>
-    <p class="max-w-xl text-ink-soft leading-relaxed">
+    <p class="text-ink-soft leading-relaxed">
       A forced platform migration, a legacy system nobody wants to touch, a data platform that needs
       to serve five teams instead of one, an AI feature that has to actually hold up in production —
       if it's one of these, I'd rather hear about it directly than through a staffing layer.
