@@ -3,7 +3,7 @@ title: "Starting a log"
 description: "Why I'm keeping notes here, and what to expect."
 date: 2026-08-14
 tags: ["meta"]
-draft: false
+draft: true
 ---
 
 This is the first entry. I'm using this space to jot down things I'm building,

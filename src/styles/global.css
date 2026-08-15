@@ -44,6 +44,53 @@
   --color-coral: #f97316;
 }
 
+/* ---------------------------------------------------------------------------
+   These prose overrides are deliberately UNLAYERED (not inside @layer
+   components), and that's load-bearing, not a stylistic choice.
+
+   Tailwind Typography ships its own complete default --tw-prose-* palette
+   directly on the plain .prose class, and that rule lands in Tailwind's
+   `utilities` layer. Our content div carries both .prose-ledger and .prose
+   as separate classes — putting our override inside @layer components
+   looked reasonable and even higher-specificity, but @layer utilities
+   always beats @layer components in Tailwind's default layer order
+   regardless of selector specificity (layers override specificity
+   entirely when both rules are layered). That's why an earlier, layered
+   version of this exact rule silently lost and inline code rendered
+   near-black-on-black in dark mode.
+
+   Unlayered CSS beats ANY layered CSS unconditionally, which is the same
+   trick already used for the dark-mode color tokens above. Confirmed by
+   inspecting the actual compiled output before and after this change. */
+.prose-ledger a {
+  color: var(--color-moss);
+  text-decoration-color: var(--color-accent-soft);
+  text-underline-offset: 3px;
+}
+.prose-ledger a:hover {
+  color: var(--color-accent);
+}
+
+.prose-ledger.prose {
+  --tw-prose-body: var(--color-ink-soft);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-lead: var(--color-ink-soft);
+  --tw-prose-links: var(--color-moss);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-counters: var(--color-moss);
+  --tw-prose-bullets: var(--color-rule);
+  --tw-prose-hr: var(--color-rule);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: var(--color-rule);
+  --tw-prose-captions: var(--color-ink-soft);
+  --tw-prose-kbd: var(--color-ink);
+  --tw-prose-code: var(--color-ink);
+  --tw-prose-pre-code: var(--color-ink);
+  --tw-prose-pre-bg: var(--color-surface);
+  --tw-prose-th-borders: var(--color-rule);
+  --tw-prose-td-borders: var(--color-rule);
+}
+
 @layer base {
   html {
     background: var(--color-paper);
@@ -132,5 +179,21 @@
   }
   .prose-ledger a:hover {
     color: var(--color-accent);
+  }
+
+  /* Shiki (Astro's syntax highlighter) bakes colors as inline styles per
+     token — with dual themes configured in astro.config.mjs, the light
+     theme is the direct color/background-color value, and dark mode's
+     alternate is carried as --shiki-dark/--shiki-dark-bg custom properties
+     on the same element (confirmed by inspecting the actual build output —
+     there is no equivalent --shiki-light variable, so only the dark
+     override is needed here). !important is required to beat the inline
+     light-theme values that are always present by default — and, unlike
+     the --tw-prose-* mapping above, !important rules always outrank
+     normal rules regardless of layer, so this one is safe to leave here. */
+  :root[data-theme="dark"] .astro-code,
+  :root[data-theme="dark"] .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
   }
 }
