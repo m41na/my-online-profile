@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { practice, specializations, engagements, credentials, thesis, verticalFocus } from '../data/practice';
+import { practice, specializations, engagements, credentials, thesis } from '../data/practice';
 
 const allCasework = await getCollection('casework', ({ data }) => data.status === 'live');
 const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
@@ -50,15 +50,13 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
     <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-6">
       {specializations.map((item) => (
         <li>
-          <h3 class="font-display text-lg text-ink">{item.title}</h3>
+          <h3 class="font-display text-lg text-ink">
+            {item.title} <span class="font-body font-normal text-sm text-ink-soft">(client — {item.client})</span>
+          </h3>
           <p class="text-sm text-ink-soft leading-relaxed mt-1.5">{item.detail}</p>
         </li>
       ))}
     </ul>
-    <div class="mt-8 bg-surface border border-rule rounded-sm px-5 py-4">
-      <h3 class="font-display text-base text-ink">{verticalFocus.title}</h3>
-      <p class="text-sm text-ink-soft leading-relaxed mt-1.5">{verticalFocus.body}</p>
-    </div>
   </section>
 
   <!-- Case studies -->

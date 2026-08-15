@@ -33,31 +33,28 @@ export const thesis = {
   aiNote: "The AI-integration work is a different kind of proof \u2014 not ahead of a trend, but doing the hardest, least-solved part of a problem everyone's racing toward right now.",
 };
 
-// Named explicitly because it's a sharper, higher-trust pitch to an
-// insurance buyer than "generalist Java consultant."
-export const verticalFocus = {
-  title: 'Particular depth in insurance',
-  body: "Two of the four engagements below \u2014 health insurance claims modernization and P&C/specialty insurance claims data \u2014 sit in the same vertical. Insurance carries one of the largest shares of current IT staffing demand of any industry. That's not incidental, and it's worth stating plainly rather than leaving it for a buyer to piece together.",
-};
-
 // The four (plus one optional) areas of specialization — each backed by a
 // full case study in src/content/casework/. Order here drives the homepage.
 export const specializations = [
   {
     title: 'Platform migration & governance',
     detail: 'Moving off VMware/Tanzu onto OpenShift or Kubernetes at enterprise scale, with the guardrails that keep 3,000+ services from becoming 3,000 snowflakes.',
+    client: 'Discover Financial Services',
   },
   {
     title: 'Legacy modernization',
-    detail: 'Decomposing mainframe and monolith systems into services — safely, with the testing discipline that keeps the rewrite from becoming the outage.',
+    detail: 'Decomposing mainframe and monolith systems into services — API design, documentation, and lifecycle management included — with the testing discipline that keeps the rewrite from becoming the outage.',
+    client: 'WPS Health Solutions',
   },
   {
     title: 'Event-driven data platforms',
     detail: 'CDC pipelines and stream processing that give every downstream team its own live, domain-owned view of the data — not a shared lake.',
+    client: 'DAIS Technology',
   },
   {
     title: 'AI integration for JVM systems',
     detail: "Wiring LLMs into production Java services in a way that's observable and reliable, not just a demo that calls an API.",
+    client: 'Oracle Corporation',
   },
 ];
 
