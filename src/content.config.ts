@@ -1,5 +1,5 @@
 import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { glob, file } from 'astro/loaders';
 
 const blog = defineCollection({
   loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
@@ -34,4 +34,44 @@ const casework = defineCollection({
   }),
 });
 
-export const collections = { blog, casework };
+const practice = defineCollection({
+  loader: file('./src/data/practice.yaml'),
+  schema: z.object({
+    name: z.string(),
+    principal: z.string(),
+    principalTitle: z.string(),
+    tagline: z.string(),
+    positioning: z.string(),
+    engagementModel: z.string(),
+    location: z.string(),
+    email: z.string(),
+    phone: z.string(),
+    links: z.array(z.object({ label: z.string(), url: z.string() })),
+    thesis: z.object({
+      eyebrow: z.string(),
+      heading: z.string(),
+      body: z.string(),
+    }),
+    specializations: z.array(
+      z.object({
+        title: z.string(),
+        detail: z.string(),
+        client: z.string(),
+      })
+    ),
+    engagements: z.array(
+      z.object({
+        org: z.string(),
+        note: z.string(),
+        years: z.string(),
+      })
+    ),
+    credentials: z.object({
+      education: z.array(z.string()),
+      certifications: z.array(z.string()),
+      yearsExperience: z.string(),
+    }),
+  }),
+});
+
+export const collections = { blog, casework, practice };

@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-import { practice, specializations, engagements, credentials, thesis } from '../data/practice';
+import { getCollection, getEntry } from 'astro:content';
+
+const practiceEntry = await getEntry('practice', 'main');
+const { specializations, engagements, credentials, thesis, ...practice } = practiceEntry!.data;
 
 const allCasework = await getCollection('casework', ({ data }) => data.status === 'live');
 const casework = allCasework.sort((a, b) => a.data.order - b.data.order);

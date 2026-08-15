@@ -1,6 +1,9 @@
 ---
 import '../styles/global.css';
-import { practice } from '../data/practice';
+import { getEntry } from 'astro:content';
+
+const practiceEntry = await getEntry('practice', 'main');
+const practice = practiceEntry!.data;
 
 interface Props {
   title: string;
