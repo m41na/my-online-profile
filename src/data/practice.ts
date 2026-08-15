@@ -28,9 +28,8 @@ export const practice = {
 // a careful reader to notice across three separate write-ups.
 export const thesis = {
   eyebrow: 'The pattern',
-  heading: 'I keep solving this before it has a name.',
-  body: "Three times now: COBOL claims logic decomposed into services years before \u201cAI-assisted modernization\u201d was a category. A CDC platform publishing domain-owned events before \u201cdata mesh\u201d had a name. A tiered deployment governance model before \u201cplatform engineering\u201d and \u201cgolden paths\u201d were part of the vocabulary. Three times isn't luck.",
-  aiNote: "The AI-integration work is a different kind of proof \u2014 not ahead of a trend, but doing the hardest, least-solved part of a problem everyone's racing toward right now.",
+  heading: 'Blazing the trail in enterprise solutions.',
+  body: "I have consistently built engineering solutions before the enterprise gave them a name: COBOL claims logic decomposed into services years before \u201cAI-assisted modernization\u201d was a category. A CDC platform publishing domain-owned events before \u201cdata mesh\u201d had a name. A tiered deployment governance model before \u201cplatform engineering\u201d and \u201cgolden paths\u201d were part of the vocabulary. Three times isn't luck.",
 };
 
 // The four (plus one optional) areas of specialization — each backed by a
