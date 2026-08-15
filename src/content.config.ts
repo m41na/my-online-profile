@@ -23,6 +23,11 @@ const casework = defineCollection({
     client: z.string().optional(),
     // Short tag chips, e.g. ["Kafka", "Debezium", "CDC"]
     stack: z.array(z.string()).default([]),
+    // Engagement snapshot — shown as a stat strip at the top of the page.
+    duration: z.string().optional(),
+    teamSize: z.number().optional(),
+    role: z.string().optional(),
+    outcome: z.string().optional(),
     // Lower number = shown first. Use this to control priority, not date.
     order: z.number(),
     status: z.enum(['live', 'draft']).default('live'),

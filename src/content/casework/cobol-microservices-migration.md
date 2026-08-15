@@ -4,6 +4,10 @@ hook: "How characterization tests and contract boundaries turned a high-risk mai
 sector: "Healthcare / Insurance"
 client: "WPS Health Solutions"
 stack: ["COBOL", "Java", "REST", "Microservices", "Contract testing"]
+duration: "3 years"
+teamSize: 15
+role: "Senior Engineer"
+outcome: "Retired a long-standing mainframe dependency — closing out a standing technical and compliance liability for the organization."
 order: 2
 status: "live"
 ---

@@ -79,5 +79,5 @@ export const credentials = {
     'Microsoft Certified: Azure Fundamentals',
     'Oracle Cloud Infrastructure Associate',
   ],
-  yearsExperience: '13+',
+  yearsExperience: '20+',
 };

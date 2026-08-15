@@ -4,6 +4,10 @@ hook: "Log-based CDC out of Postgres, materialized into live, purpose-built view
 sector: "Insurance"
 client: "DAIS Technology"
 stack: ["Debezium", "Kafka Connect", "Kafka Streams", "CDC", "Postgres"]
+duration: "1 year"
+teamSize: 7
+role: "Tech Lead / Senior Architect"
+outcome: "Gave 100+ partner businesses a compliant, real-time view into shared claims data — closing a standing technical gap across the network."
 order: 3
 status: "live"
 ---

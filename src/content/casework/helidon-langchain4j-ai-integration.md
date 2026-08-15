@@ -4,6 +4,10 @@ hook: "The hard part of Java + AI isn't calling the model. It's making that call
 sector: "Food & Beverage / Payments"
 client: "Oracle Corporation"
 stack: ["Helidon", "LangChain4j", "RAG", "Vector DB", "MCP", "Observability"]
+duration: "1 year"
+teamSize: 7
+role: "Principal Architect"
+outcome: "Shipped the payments platform and stood up the org's first production AI integration — two separate top-level enterprise goals delivered in the same year."
 order: 4
 status: "live"
 ---

@@ -38,6 +38,37 @@ const { Content } = await render(study);
       )}
     </header>
 
+    {(study.data.duration || study.data.teamSize || study.data.role || study.data.outcome) && (
+      <div class="bg-surface border border-rule rounded-sm mb-10 divide-y divide-rule">
+        <dl class="grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-rule">
+          {study.data.duration && (
+            <div class="px-5 py-3">
+              <dt class="eyebrow">Duration</dt>
+              <dd class="font-display text-lg mt-0.5">{study.data.duration}</dd>
+            </div>
+          )}
+          {study.data.teamSize && (
+            <div class="px-5 py-3">
+              <dt class="eyebrow">Team</dt>
+              <dd class="font-display text-lg mt-0.5">{study.data.teamSize} people</dd>
+            </div>
+          )}
+          {study.data.role && (
+            <div class="px-5 py-3">
+              <dt class="eyebrow">My role</dt>
+              <dd class="font-display text-lg mt-0.5">{study.data.role}</dd>
+            </div>
+          )}
+        </dl>
+        {study.data.outcome && (
+          <div class="px-5 py-3">
+            <dt class="eyebrow">Outcome</dt>
+            <dd class="text-sm text-ink-soft leading-relaxed mt-1">{study.data.outcome}</dd>
+          </div>
+        )}
+      </div>
+    )}
+
     <div class="ledger-rule pt-8 prose-ledger max-w-none prose prose-headings:font-display prose-headings:tracking-tight prose-p:leading-relaxed prose-p:text-ink prose-a:no-underline prose-strong:text-ink prose-code:font-mono prose-code:text-sm prose-code:bg-surface prose-code:px-1 prose-code:py-0.5 prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none">
       <Content />
     </div>

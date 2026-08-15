@@ -4,6 +4,10 @@ hook: "A platform migration bigger than most 'large enterprise' benchmarks accou
 sector: "Financial Services"
 client: "Discover Financial Services"
 stack: ["Tanzu / PCF", "OpenShift", "CI/CD", "Policy-as-code", "Golden paths"]
+duration: "1 year"
+teamSize: 8
+role: "Senior Engineering Manager"
+outcome: "Cleared a mandated platform exit without missing the deadline — one of the organization's top compliance and technical priorities closed out."
 order: 1
 status: "live"
 ---

@@ -73,6 +73,11 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
                   <span class="eyebrow whitespace-nowrap">{study.data.sector}</span>
                 </div>
                 <p class="text-ink-soft mt-2 leading-relaxed max-w-2xl">{study.data.hook}</p>
+                {(study.data.duration || study.data.teamSize || study.data.role) && (
+                  <p class="eyebrow mt-2 text-ink-soft">
+                    {[study.data.duration, study.data.teamSize && `Team of ${study.data.teamSize}`, study.data.role].filter(Boolean).join(' · ')}
+                  </p>
+                )}
                 {study.data.stack.length > 0 && (
                   <div class="flex flex-wrap gap-2 mt-3">
                     {study.data.stack.map((tag) => (
