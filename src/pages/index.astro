@@ -56,7 +56,7 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
   <!-- Specializations -->
   <section class="mt-12">
     <h2 class="eyebrow mb-6">Where I work</h2>
-    <ul class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <ul class="grid sm:grid-cols-2 gap-4">
       {specializations.map((item) => (
         <li class="panel panel-interactive px-5 py-5">
           <h3 class="font-display font-semibold text-lg text-ink">{item.title}</h3>
@@ -71,20 +71,20 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
   <!-- Case studies -->
   <section id="work" class="mt-12 scroll-mt-8">
     <h2 class="eyebrow mb-6">Case files</h2>
-    <ol class="grid lg:grid-cols-2 gap-4">
+    <ol class="space-y-4">
       {casework.map((study, i) => (
         <li>
-          <a href={`/work/${study.id}/`} class="panel panel-interactive group block px-6 py-6 h-full">
+          <a href={`/work/${study.id}/`} class="panel panel-interactive group block px-6 py-6">
             <div class="flex items-baseline gap-4">
               <span class="font-mono text-sm text-coral flex-shrink-0">{String(i + 1).padStart(2, '0')}</span>
               <div class="min-w-0">
-                <div class="flex flex-col gap-1">
+                <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <h3 class="font-display font-semibold text-2xl group-hover:text-accent transition-colors">
                     {study.data.title}
                   </h3>
                   <span class="eyebrow whitespace-nowrap">{study.data.sector}</span>
                 </div>
-                <p class="text-ink-soft mt-2 leading-relaxed">{study.data.hook}</p>
+                <p class="text-ink-soft mt-2 leading-relaxed max-w-2xl">{study.data.hook}</p>
                 {(study.data.duration || study.data.teamSize || study.data.role) && (
                   <p class="eyebrow mt-2 text-ink-soft">
                     {[study.data.duration, study.data.teamSize && `Team of ${study.data.teamSize}`, study.data.role].filter(Boolean).join(' · ')}
