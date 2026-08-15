@@ -18,17 +18,17 @@ const { Content } = await render(post);
   <article class="pt-4">
     <a href="/blog" class="eyebrow hover:text-accent transition-colors">&larr; Notes</a>
 
-    <header class="mt-6 mb-10">
+    <header class="mt-6 mb-8">
       <time class="eyebrow" datetime={post.data.date.toISOString()}>
         {post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
       </time>
-      <h1 class="font-display text-4xl sm:text-5xl leading-[1.05] tracking-tight mt-3">
+      <h1 class="font-display font-semibold text-4xl sm:text-5xl leading-[1.05] tracking-tight mt-3">
         {post.data.title}
       </h1>
       {post.data.tags.length > 0 && (
         <div class="flex gap-2 mt-4">
           {post.data.tags.map((tag) => (
-            <span class="text-xs font-mono px-1.5 py-0.5 bg-surface rounded-sm border border-rule text-ink-soft">
+            <span class="text-xs font-mono px-2.5 py-1 bg-surface rounded-full border border-rule text-ink-soft">
               {tag}
             </span>
           ))}
@@ -36,7 +36,7 @@ const { Content } = await render(post);
       )}
     </header>
 
-    <div class="ledger-rule pt-8 prose-ledger max-w-none prose prose-headings:font-display prose-headings:tracking-tight prose-p:leading-relaxed prose-p:text-ink prose-a:no-underline prose-strong:text-ink prose-code:font-mono prose-code:text-sm prose-code:bg-surface prose-code:px-1 prose-code:py-0.5 prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none">
+    <div class="prose-ledger max-w-none prose prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-p:leading-relaxed prose-p:text-ink prose-a:no-underline prose-strong:text-ink prose-code:font-mono prose-code:text-sm prose-code:bg-surface prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
       <Content />
     </div>
   </article>

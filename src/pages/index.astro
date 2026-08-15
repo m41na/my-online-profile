@@ -18,31 +18,34 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
 
 <Layout title="Platform Migration, Legacy Modernization & AI Integration">
   <!-- Hero -->
-  <section class="pt-4 pb-12">
-    <p class="eyebrow mb-3">{practice.engagementModel}</p>
-    <h1 class="font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight">
-      {practice.name}
-    </h1>
-    <p class="font-display italic text-xl sm:text-2xl text-ink-soft mt-2">
-      {practice.tagline}
-    </p>
-    <p class="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
-      {practice.positioning}
-    </p>
-    <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 eyebrow">
-      {practice.links.map((link) => (
-        <a href={link.url} class="hover:text-accent transition-colors underline decoration-accent-soft underline-offset-4">
-          {link.label}
-        </a>
-      ))}
-      <span class="text-ink-soft normal-case tracking-normal font-mono text-xs">{practice.principal}, {practice.principalTitle}</span>
+  <section class="relative pt-4 pb-14 overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="relative">
+      <p class="eyebrow mb-3">{practice.engagementModel}</p>
+      <h1 class="font-display font-semibold text-5xl sm:text-6xl leading-[1.05] tracking-tight">
+        {practice.name}
+      </h1>
+      <p class="font-display text-xl sm:text-2xl text-accent mt-3">
+        {practice.tagline}
+      </p>
+      <p class="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-ink-soft">
+        {practice.positioning}
+      </p>
+      <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 eyebrow">
+        {practice.links.map((link) => (
+          <a href={link.url} class="hover:text-accent transition-colors underline decoration-accent-soft underline-offset-4">
+            {link.label}
+          </a>
+        ))}
+        <span class="text-ink-soft normal-case tracking-normal font-mono text-xs">{practice.principal}, {practice.principalTitle}</span>
+      </div>
     </div>
   </section>
 
   <!-- The pattern (thesis) -->
-  <section class="ledger-rule pt-8 pb-2">
+  <section class="panel px-6 py-8 sm:px-8 sm:py-10 mt-6">
     <p class="eyebrow mb-3">{thesis.eyebrow}</p>
-    <h2 class="font-display text-3xl sm:text-4xl leading-tight tracking-tight max-w-2xl">
+    <h2 class="font-display font-semibold text-3xl sm:text-4xl leading-tight tracking-tight max-w-2xl">
       {thesis.heading}
     </h2>
     <p class="mt-4 max-w-2xl text-ink-soft leading-relaxed">
@@ -51,14 +54,14 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
   </section>
 
   <!-- Specializations -->
-  <section class="ledger-rule pt-10 mt-10 pb-2">
+  <section class="mt-12">
     <h2 class="eyebrow mb-6">Where I work</h2>
-    <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-6">
+    <ul class="grid sm:grid-cols-2 gap-4">
       {specializations.map((item) => (
-        <li>
-          <h3 class="font-display text-lg text-ink">{item.title}</h3>
+        <li class="panel panel-interactive px-5 py-5">
+          <h3 class="font-display font-semibold text-lg text-ink">{item.title}</h3>
           <p class="text-sm text-ink-soft leading-relaxed mt-1.5">
-            {item.detail} <span class="text-xs">(client — {item.client})</span>
+            {item.detail} <span class="text-xs text-coral">(client — {item.client})</span>
           </p>
         </li>
       ))}
@@ -66,17 +69,17 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
   </section>
 
   <!-- Case studies -->
-  <section id="work" class="ledger-rule pt-10 mt-10 scroll-mt-8">
-    <h2 class="eyebrow mb-8">Case files</h2>
-    <ol class="space-y-8">
+  <section id="work" class="mt-12 scroll-mt-8">
+    <h2 class="eyebrow mb-6">Case files</h2>
+    <ol class="space-y-4">
       {casework.map((study, i) => (
         <li>
-          <a href={`/work/${study.id}/`} class="group block">
-            <div class="flex items-baseline gap-3">
-              <span class="font-mono text-sm text-accent flex-shrink-0">{String(i + 1).padStart(2, '0')}</span>
+          <a href={`/work/${study.id}/`} class="panel panel-interactive group block px-6 py-6">
+            <div class="flex items-baseline gap-4">
+              <span class="font-mono text-sm text-coral flex-shrink-0">{String(i + 1).padStart(2, '0')}</span>
               <div class="min-w-0">
                 <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 class="font-display text-2xl group-hover:text-accent transition-colors">
+                  <h3 class="font-display font-semibold text-2xl group-hover:text-accent transition-colors">
                     {study.data.title}
                   </h3>
                   <span class="eyebrow whitespace-nowrap">{study.data.sector}</span>
@@ -90,7 +93,7 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
                 {study.data.stack.length > 0 && (
                   <div class="flex flex-wrap gap-2 mt-3">
                     {study.data.stack.map((tag) => (
-                      <span class="text-xs font-mono px-1.5 py-0.5 bg-surface rounded-sm border border-rule text-ink-soft">
+                      <span class="text-xs font-mono px-2.5 py-1 bg-paper rounded-full border border-rule text-ink-soft">
                         {tag}
                       </span>
                     ))}
@@ -105,7 +108,7 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
   </section>
 
   <!-- Selected engagements -->
-  <section class="ledger-rule pt-10 mt-10">
+  <section class="panel px-6 py-8 sm:px-8 sm:py-10 mt-12">
     <h2 class="eyebrow mb-6">Selected engagements</h2>
     <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-3">
       {engagements.map((e) => (
@@ -126,7 +129,7 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="ledger-rule pt-10 mt-10 scroll-mt-8">
+  <section id="contact" class="mt-12 scroll-mt-8">
     <h2 class="eyebrow mb-4">Get in touch</h2>
     <p class="max-w-xl text-ink-soft leading-relaxed">
       If one of these matches a problem you're staring down right now — especially the Tanzu/OpenShift
@@ -134,7 +137,7 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
     </p>
     <a
       href={`mailto:${practice.email}`}
-      class="inline-block mt-5 font-mono text-sm px-4 py-2 border border-ink rounded-sm hover:bg-ink hover:text-paper transition-colors"
+      class="inline-block mt-5 font-mono text-sm px-5 py-2.5 rounded-full bg-accent text-paper hover:opacity-90 transition-opacity"
     >
       {practice.email}
     </a>
