@@ -44,6 +44,7 @@ const practice = defineCollection({
     positioning: z.string(),
     engagementModel: z.string(),
     location: z.string(),
+    foundedYear: z.string(),
     email: z.string(),
     phone: z.string(),
     links: z.array(z.object({ label: z.string(), url: z.string() })),
