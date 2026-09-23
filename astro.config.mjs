@@ -8,9 +8,13 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
+const isBusiness = process.env.SITE_TARGET === 'business';
+
 export default defineConfig({
-  // TODO: update to your real domain once you connect one in Cloudflare Pages
-  site: 'https://kerbdrop.pages.dev',
+  // Real domains, now that both are actually connected in Cloudflare.
+  // Differs by build target so the sitemap/canonical URLs are correct
+  // for whichever site this build produces.
+  site: isBusiness ? 'https://kerbdrop.com' : 'https://smaina.kerbdrop.com',
   vite: {
     plugins: [tailwindcss()]
   },

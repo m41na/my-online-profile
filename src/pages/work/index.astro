@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { isBusiness } from '../../lib/site-target';
 
 const allCasework = await getCollection('casework', ({ data }) => data.status === 'live');
 const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
+const caseworkHref = (id: string) => (isBusiness ? `https://smaina.kerbdrop.com/work/${id}/` : `/work/${id}/`);
 ---
 
 <Layout title="Case files" description="Engagements where Kerbdrop was brought in to solve a specific, high-stakes problem.">
@@ -19,7 +21,7 @@ const casework = allCasework.sort((a, b) => a.data.order - b.data.order);
     <ol class="space-y-4">
       {casework.map((study, i) => (
         <li>
-          <a href={`/work/${study.id}/`} class="panel panel-interactive group block px-6 py-6">
+          <a href={caseworkHref(study.id)} class="panel panel-interactive group block px-6 py-6">
             <div class="flex items-baseline gap-4">
               <span class="font-mono text-sm text-coral flex-shrink-0">{String(i + 1).padStart(2, '0')}</span>
               <div class="min-w-0">

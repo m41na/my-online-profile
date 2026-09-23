@@ -1,0 +1,29 @@
+---
+// A full-viewport-width section with its own background, and an inner
+// wrapper that re-applies the site's content-width constraint — this is
+// what makes alternating section backgrounds possible at all. Sections
+// rendered via Layout's <main> are NOT width-constrained for the business
+// site (see Layout.astro), specifically so each one can bleed edge to
+// edge and carry its own background color while the actual content
+// inside stays readable-width.
+interface Props {
+  id?: string;
+  background?: 'paper' | 'surface' | 'accent';
+  class?: string;
+}
+
+const { id, background = 'paper', class: className = '' } = Astro.props;
+
+const bg =
+  background === 'accent'
+    ? 'bg-accent text-paper'
+    : background === 'surface'
+      ? 'bg-surface'
+      : 'bg-paper';
+---
+
+<section id={id} class={`w-full ${bg} py-16 sm:py-24 scroll-mt-8 ${className}`}>
+  <div class="px-5 sm:px-8 lg:w-[60%] lg:mx-auto">
+    <slot />
+  </div>
+</section>

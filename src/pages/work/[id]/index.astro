@@ -1,8 +1,13 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
+import { isBusiness } from '../../../lib/site-target';
 
 export async function getStaticPaths() {
+  // The business site links case studies out to the personal site's full
+  // write-ups instead of maintaining its own copy — keeps kerbdrop.com a
+  // genuine single page, not a build with extra unreachable routes.
+  if (isBusiness) return [];
   const studies = await getCollection('casework', ({ data }) => data.status === 'live');
   return studies.map((study) => ({
     params: { id: study.id },

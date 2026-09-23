@@ -1,12 +1,20 @@
 # ---------------------------------------------------------------------------
-# This is the ONE file you edit to update the practice's identity, pitch,
-# specializations, engagement history, and credentials. Plain YAML — no
-# code. Edit this, commit, push, and Cloudflare Pages rebuilds the site.
+# This drives BOTH sites from one file:
+#   - "personal" -> smaina.kerbdrop.com (practitioner voice, case studies, blog)
+#   - "business" -> kerbdrop.com (company voice, capability statement, no blog)
+# Which one a build uses is picked by the SITE_TARGET env var (see
+# package.json's build:personal / build:business scripts). Specializations,
+# engagements, and credentials are duplicated across both entries on
+# purpose — they're genuinely the same facts read by two different
+# audiences, and keeping each entry self-contained is worth the small
+# amount of duplication.
 #
-# Full case study write-ups live as their own Markdown files in
-# src/content/casework/. Blog posts live in src/content/blog/.
+# Case studies live in src/content/casework/ and are shared automatically
+# by both sites — no duplication needed there. Blog posts live in
+# src/content/blog/ and are personal-site-only by convention (not linked
+# in the business nav).
 # ---------------------------------------------------------------------------
-main:
+personal:
   name: Kerbdrop
   principal: Stephen Maina
   principalTitle: Senior Principal Architect
@@ -32,7 +40,6 @@ main:
     - label: GitHub
       url: "https://github.com/akilisha"
 
-  # The cross-case-study thesis, stated once and directly on the homepage.
   thesis:
     eyebrow: The pattern
     heading: Blazing the trail with enterprise solutions.
@@ -51,8 +58,6 @@ main:
       version of the same problem: not whether you've got the trend, but
       whether it actually works.
 
-  # The "Where I work" grid on the homepage. Order here is the display
-  # order (fills left-to-right, top-to-bottom in a 2-column grid).
   specializations:
     - title: Platform migration & governance
       detail: >-
@@ -79,11 +84,6 @@ main:
         observable and reliable, not just a demo that calls an API.
       client: Oracle Corporation
 
-  # "Selected engagements" — the condensed client list near the bottom of
-  # the homepage. This is broader than the four case studies above: every
-  # client relationship goes here, including ones without a full write-up.
-  # "years" is the overall relationship span, which can differ from a case
-  # study's "duration" (the length of that one specific project).
   engagements:
     - org: Discover Financial Services
       note: Platform migration & CI/CD governance
@@ -116,3 +116,117 @@ main:
       - "Microsoft Certified: Azure Fundamentals"
       - Oracle Cloud Infrastructure Associate
     yearsExperience: "20+"
+
+business:
+  name: Kerbdrop
+  legalName: Kerbdrop LLC
+  principal: Stephen Maina
+  principalTitle: Founder & Principal Architect
+  tagline: Platform Migration. Legacy Modernization. Event-Driven Data. AI Integration.
+  positioning: >-
+    Kerbdrop LLC is an independent engineering firm delivering senior platform
+    architecture and modernization work on a subcontract basis — scoped
+    engagements with working systems at the end.
+  engagementModel: Open to C2C subcontract and vendor-partnership engagements.
+  location: Sheboygan, WI · Remote-first
+  foundedYear: "2025"
+  email: info@kerbdrop.com
+  phone: "(920) 441-6874"
+
+  links:
+    - label: Email
+      url: "mailto:info@kerbdrop.com"
+    - label: LinkedIn
+      url: "https://www.linkedin.com/in/stephenmainalink"
+    - label: GitHub
+      url: "https://github.com/akilisha"
+
+  thesis:
+    eyebrow: The pattern
+    heading: Blazing the trail with enterprise solutions.
+    body: >-
+      Kerbdrop has consistently delivered engineering solutions before the
+      enterprise came up with a name for them: COBOL systems decomposed
+      into microservices years before "AI-assisted modernization" was a
+      category. A CDC platform publishing domain-owned events before "data
+      mesh" had a name. A tiered deployment governance model before
+      "platform engineering" and "golden paths" were part of the
+      vocabulary. That instinct hasn't gone anywhere. Most platform teams
+      now have the tooling — Gartner puts adoption at 80% of large orgs by
+      2027 — but fewer than a third are seeing it actually pay off, and the
+      same gap is opening up with AI governance bolted onto platforms
+      after the fact instead of built in from the start. That's today's
+      version of the same problem: not whether you've got the trend, but
+      whether it actually works.
+
+  specializations:
+    - title: Platform migration & governance
+      detail: >-
+        Moving off VMware/Tanzu onto OpenShift or Kubernetes at enterprise
+        scale, with the guardrails that keep 3,000+ services from becoming
+        3,000 snowflakes.
+      client: Discover Financial Services
+    - title: Legacy modernization
+      detail: >-
+        Decomposing mainframe and monolith systems into micro-services,
+        including API design, documentation, and access management — with
+        the testing discipline that keeps the rewrite from becoming the
+        outage.
+      client: WPS Health Solutions
+    - title: Event-driven data platforms
+      detail: >-
+        CDC pipelines and stream processing that give every downstream
+        team its own live, domain-owned view of the data — not a shared
+        lake.
+      client: DAIS Technology
+    - title: AI integration for JVM systems
+      detail: >-
+        Wiring LLMs into production Java services in a way that's
+        observable and reliable, not just a demo that calls an API.
+      client: Oracle Corporation
+
+  engagements:
+    - org: Discover Financial Services
+      note: Platform migration & CI/CD governance
+      years: "2021–2023, 2025–"
+    - org: Oracle Corporation
+      note: AI integration, payments infrastructure
+      years: "2024–2025"
+    - org: Comerica Bank
+      note: Engineering quality systems
+      years: "2023–2024"
+    - org: Expedia Group
+      note: ML-driven listing quality scoring
+      years: "2019–2020"
+    - org: Bank of America
+      note: Platform & frontend modernization
+      years: "2017–2019"
+    - org: WPS Health Solutions
+      note: Mainframe-to-microservices migration
+      years: "2014–2017"
+    - org: Best Buy
+      note: High-throughput logistics platform
+      years: "2013–2014"
+
+  credentials:
+    education:
+      - M.Sc. Computer Science, Maharishi International University
+      - B.Sc. Mechanical/Production Engineering, Moi University
+    certifications:
+      - AWS Certified Cloud Practitioner
+      - "Microsoft Certified: Azure Fundamentals"
+      - Oracle Cloud Infrastructure Associate
+    yearsExperience: "20+"
+
+  # Business-only: powers the Differentiators and Capability Statement
+  # sections on the homepage. Core competencies reuse `specializations`
+  # above rather than duplicating a second list — one source of truth for
+  # "what Kerbdrop does." No certifications yet — that field is left out
+  # entirely rather than filled with a placeholder. Add a
+  # `certifications:` list here the day any are obtained.
+  capabilities:
+    differentiators:
+      - "20+ years of enterprise engineering experience across fintech, healthcare, insurance, and retail"
+      - "Direct engagement — the person you evaluate is the person doing the work, with no subcontracted bench in between"
+      - "Proven at Fortune 500 scale: platform migrations spanning 3,600+ services under fixed, no-slip deadlines"
+      - "Outcome-scoped engagements with a defined start and end date"

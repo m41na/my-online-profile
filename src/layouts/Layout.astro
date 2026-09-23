@@ -1,11 +1,12 @@
 ---
 import '../styles/global.css';
 import { getEntry } from 'astro:content';
+import { SITE_TARGET, isBusiness } from '../lib/site-target';
 
-const practiceEntry = await getEntry('practice', 'main');
+const practiceEntry = await getEntry('practice', SITE_TARGET);
 if (!practiceEntry) {
   throw new Error(
-    "Could not load the 'practice' data entry ('main') from src/data/practice.yaml. " +
+    `Could not load the 'practice' data entry ('${SITE_TARGET}') from src/data/practice.yaml. ` +
       'This usually means a stale .astro cache — stop the dev server and run: ' +
       'rm -rf .astro node_modules/.vite && npm run dev'
   );
@@ -21,19 +22,23 @@ const { title, description = practice.positioning } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-site={isBusiness ? 'business' : undefined}>
   <head>
     <meta charset="UTF-8" />
-    <script is:inline>
-      // Set theme before first paint to avoid a flash of the wrong theme.
-      (function () {
-        try {
-          var stored = localStorage.getItem('theme');
-          var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-          if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        } catch (e) {}
-      })();
-    </script>
+    {!isBusiness && (
+      <script is:inline>
+        // Set theme before first paint to avoid a flash of the wrong theme.
+        // Business site is light-only (no toggle, no dark mode at all —
+        // see global.css) so this only runs for the personal site.
+        (function () {
+          try {
+            var stored = localStorage.getItem('theme');
+            var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+          } catch (e) {}
+        })();
+      </script>
+    )}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
@@ -47,78 +52,125 @@ const { title, description = practice.positioning } = Astro.props;
     />
   </head>
   <body class="bg-paper text-ink font-body antialiased">
-    <div class="w-full px-5 sm:px-8 lg:w-[60%] lg:px-0 lg:mx-auto">
-      <header class="flex items-center justify-between flex-wrap gap-y-3 pt-10 pb-6">
-        <a href="/" class="flex items-baseline gap-2.5 group">
-          <span class="font-display font-semibold text-lg tracking-tight group-hover:text-accent transition-colors">
-            {practice.name}
-          </span>
-          <span class="eyebrow hidden sm:inline">{practice.principal}</span>
-        </a>
-        <nav class="flex items-center gap-3 sm:gap-6 eyebrow">
-          <a href="/work" class="hover:text-accent transition-colors">Work</a>
-          <a href="/blog" class="hover:text-accent transition-colors">Blog</a>
-          <a href="/#contact" class="hover:text-accent transition-colors">Contact</a>
-          <button
-            id="theme-toggle"
-            type="button"
-            aria-label="Toggle dark mode"
-            class="relative w-12 h-7 rounded-full border border-rule bg-surface flex items-center px-1 transition-colors"
-          >
-            <span
-              id="theme-thumb"
-              class="flex items-center justify-center w-5 h-5 rounded-full bg-accent text-paper transition-transform duration-200"
-            >
-              <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3">
-                <circle cx="12" cy="12" r="4"></circle>
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-              </svg>
-              <svg id="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 hidden">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
-              </svg>
+    {isBusiness ? (
+      <>
+        <div class="w-full px-5 sm:px-8 lg:w-[60%] lg:px-0 lg:mx-auto">
+          <header class="flex items-center justify-between flex-wrap gap-y-3 pt-10 pb-6">
+            <a href="/" class="flex items-baseline gap-2.5 group">
+              <span class="font-display font-semibold text-lg tracking-tight group-hover:text-accent transition-colors">
+                {practice.name}
+              </span>
+            </a>
+            <nav class="flex items-center gap-3 sm:gap-6 eyebrow">
+              <a href="#services" class="hover:text-accent transition-colors">Services</a>
+              <a href="#case-studies" class="hover:text-accent transition-colors">Case Studies</a>
+              <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
+            </nav>
+          </header>
+        </div>
+
+        <main class="w-full">
+          <slot />
+        </main>
+
+        <div class="w-full bg-surface">
+          <div class="px-5 sm:px-8 lg:w-[60%] lg:mx-auto">
+            <footer class="mb-6 py-10">
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-8">
+                <div>
+                  <p class="font-display font-semibold text-lg text-ink">{practice.legalName || practice.name}</p>
+                  <p class="text-sm text-ink-soft mt-2 leading-relaxed">{practice.tagline}</p>
+                </div>
+                <div class="eyebrow space-y-2">
+                  <p class="text-ink-soft">Explore</p>
+                  <a href="#services" class="block normal-case tracking-normal text-sm text-ink hover:text-accent transition-colors">Services</a>
+                  <a href="#case-studies" class="block normal-case tracking-normal text-sm text-ink hover:text-accent transition-colors">Case Studies</a>
+                </div>
+              </div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 eyebrow mt-8 pt-6 border-t border-rule">
+                <span>&copy; {practice.foundedYear} {practice.legalName || practice.name}</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </>
+    ) : (
+      <div class="w-full px-5 sm:px-8 lg:w-[60%] lg:px-0 lg:mx-auto">
+        <header class="flex items-center justify-between flex-wrap gap-y-3 pt-10 pb-6">
+          <a href="/" class="flex items-baseline gap-2.5 group">
+            <span class="font-display font-semibold text-lg tracking-tight group-hover:text-accent transition-colors">
+              {practice.name}
             </span>
-          </button>
-        </nav>
-      </header>
+            <span class="eyebrow hidden sm:inline">{practice.principal}</span>
+          </a>
+          <nav class="flex items-center gap-3 sm:gap-6 eyebrow">
+            <a href="/work" class="hover:text-accent transition-colors">Work</a>
+            <a href="/#contact" class="hover:text-accent transition-colors">Contact</a>
+            <button
+              id="theme-toggle"
+              type="button"
+              aria-label="Toggle dark mode"
+              class="relative w-12 h-7 rounded-full border border-rule bg-surface flex items-center px-1 transition-colors"
+            >
+              <span
+                id="theme-thumb"
+                class="flex items-center justify-center w-5 h-5 rounded-full bg-accent text-paper transition-transform duration-200"
+              >
+                <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                </svg>
+                <svg id="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 hidden">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+                </svg>
+              </span>
+            </button>
+          </nav>
+        </header>
 
-      <main class="pb-20">
-        <slot />
-      </main>
+        <main class="pb-20">
+          <slot />
+        </main>
 
-      <footer class="ledger-rule py-8 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 eyebrow">
-        <span>&copy; {practice.foundedYear} {practice.name}</span>
-        <span>{practice.location}</span>
-      </footer>
-    </div>
+        <footer class="ledger-rule mb-6 py-8">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 eyebrow">
+            <span>&copy; {practice.foundedYear} {practice.name}</span>
+            <span>{practice.location}</span>
+          </div>
+        </footer>
+      </div>
+    )}
 
-    <script is:inline>
-      (function () {
-        var btn = document.getElementById('theme-toggle');
-        var thumb = document.getElementById('theme-thumb');
-        var sun = document.getElementById('theme-icon-sun');
-        var moon = document.getElementById('theme-icon-moon');
-        function isDark() {
-          return document.documentElement.getAttribute('data-theme') === 'dark';
-        }
-        function update() {
-          var dark = isDark();
-          thumb.style.transform = dark ? 'translateX(20px)' : 'translateX(0)';
-          sun.classList.toggle('hidden', dark);
-          moon.classList.toggle('hidden', !dark);
-          btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
-        }
-        update();
-        btn.addEventListener('click', function () {
-          if (isDark()) {
-            document.documentElement.removeAttribute('data-theme');
-            try { localStorage.setItem('theme', 'light'); } catch (e) {}
-          } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            try { localStorage.setItem('theme', 'dark'); } catch (e) {}
+    {!isBusiness && (
+      <script is:inline>
+        (function () {
+          var btn = document.getElementById('theme-toggle');
+          var thumb = document.getElementById('theme-thumb');
+          var sun = document.getElementById('theme-icon-sun');
+          var moon = document.getElementById('theme-icon-moon');
+          function isDark() {
+            return document.documentElement.getAttribute('data-theme') === 'dark';
+          }
+          function update() {
+            var dark = isDark();
+            thumb.style.transform = dark ? 'translateX(20px)' : 'translateX(0)';
+            sun.classList.toggle('hidden', dark);
+            moon.classList.toggle('hidden', !dark);
+            btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
           }
           update();
-        });
-      })();
-    </script>
+          btn.addEventListener('click', function () {
+            if (isDark()) {
+              document.documentElement.removeAttribute('data-theme');
+              try { localStorage.setItem('theme', 'light'); } catch (e) {}
+            } else {
+              document.documentElement.setAttribute('data-theme', 'dark');
+              try { localStorage.setItem('theme', 'dark'); } catch (e) {}
+            }
+            update();
+          });
+        })();
+      </script>
+    )}
   </body>
 </html>

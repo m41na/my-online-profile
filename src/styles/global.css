@@ -31,7 +31,9 @@
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
-/* Dark mode — toggled by data-theme="dark" on <html>. */
+/* Dark mode — toggled by data-theme="dark" on <html>. Personal site only;
+   the business site is light-only (see below) and never shows this
+   toggle in its nav. */
 :root[data-theme="dark"] {
   --color-paper: #0d0d12;
   --color-surface: #17171f;
@@ -42,6 +44,32 @@
   --color-accent-soft: #7c4a1f;
   --color-moss: #fdba74;
   --color-coral: #f97316;
+}
+
+/* ---------------------------------------------------------------------------
+   Business site (kerbdrop.com) — a genuinely different visual identity,
+   not the personal site's dev-tool theme with different copy. That theme
+   (dark-first, Forgejo-orange, monospace labels, bordered dashboard-style
+   panels) was built for a technical practitioner audience; it's the wrong
+   register for a vendor-compliance-facing business site. This is warm,
+   light-only, no monospace labels, softer cards — closer to what an
+   established professional-services firm's site looks like than a
+   developer tool's.
+
+   Unlayered, same as the dark-mode block above, so it reliably wins
+   regardless of layer/specificity — see the .prose-ledger.prose comment
+   further down for why that matters in this codebase specifically.
+--------------------------------------------------------------------------- */
+:root[data-site="business"] {
+  --color-paper: #fbf6ec;
+  --color-surface: #ffffff;
+  --color-ink: #2a2318;
+  --color-ink-soft: #6b5d4a;
+  --color-rule: #e5dac5;
+  --color-accent: #b5762e;
+  --color-accent-soft: #edd3a8;
+  --color-moss: #6e7b4f;
+  --color-coral: #9c5233;
 }
 
 /* ---------------------------------------------------------------------------
@@ -134,6 +162,15 @@
     color: var(--color-moss);
   }
 
+  /* Business site: drop the monospace "terminal label" treatment — it
+     reads as developer-tool branding, not a professional-services firm.
+     Plain uppercase sans instead. */
+  :root[data-site="business"] .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
   /* Legacy hairline-divider class — kept for anything still referencing it,
      but new sections use .panel instead. */
   .ledger-rule {
@@ -145,6 +182,14 @@
     background: var(--color-surface);
     border: 1px solid var(--color-rule);
     border-radius: 1.25rem;
+  }
+
+  /* Business site: softer, borderless card — a subtle shadow instead of a
+     hard border reads as editorial/professional rather than a bordered
+     dashboard-style dev-tool panel. */
+  :root[data-site="business"] .panel {
+    border: none;
+    box-shadow: 0 1px 2px rgba(42, 35, 24, 0.04), 0 4px 16px -4px rgba(42, 35, 24, 0.08);
   }
 
   /* Interactive panels (case study cards, specialization cards) get a
@@ -159,6 +204,11 @@
     transform: translateY(-2px);
   }
 
+  :root[data-site="business"] .panel-interactive:hover {
+    border-color: transparent;
+    box-shadow: 0 2px 4px rgba(42, 35, 24, 0.06), 0 12px 24px -8px rgba(181, 118, 46, 0.25);
+  }
+
   /* Soft radial glow, used behind the hero heading. */
   .hero-glow {
     position: absolute;
@@ -170,6 +220,12 @@
     opacity: 0.55;
     pointer-events: none;
     z-index: 0;
+  }
+
+  /* Business site: much more subtle — a calm professional page, not a
+     dramatic tech-startup hero moment. */
+  :root[data-site="business"] .hero-glow {
+    opacity: 0.35;
   }
 
   .prose-ledger a {

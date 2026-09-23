@@ -1,18 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob, file } from 'astro/loaders';
 
-const blog = defineCollection({
-  loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    // Just write dates as 'YYYY-MM-DD' in frontmatter — no ceremony.
-    date: z.coerce.date(),
-    tags: z.array(z.string()).default([]),
-    draft: z.boolean().default(false),
-  }),
-});
-
 const casework = defineCollection({
   loader: glob({ base: './src/content/casework', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
@@ -72,7 +60,17 @@ const practice = defineCollection({
       certifications: z.array(z.string()),
       yearsExperience: z.string(),
     }),
+    // Business-entry-only fields, below. Optional so the schema still
+    // validates the personal entry, which doesn't have them.
+    legalName: z.string().optional(),
+    capabilities: z
+      .object({
+        differentiators: z.array(z.string()),
+        // No certifications yet — add a `certifications: z.array(z.string())`
+        // field here the day any exist, rather than shipping an empty list.
+      })
+      .optional(),
   }),
 });
 
-export const collections = { blog, casework, practice };
+export const collections = { casework, practice };
